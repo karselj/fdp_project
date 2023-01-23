@@ -2,8 +2,8 @@ from dash import Dash, html, dcc, Input, Output, State
 import dash_bootstrap_components as dbc
 from create_app import app
 from menu import menu_row
-import single_upload
-import multi_upload
+import upload_single
+import upload_multi
 
 
 

@@ -1,0 +1,7 @@
+.venv/
+.DS_Store
+.venv2/
+.ipynb_checkpoints/
+__pychache__/
+ml_model/data/
+ml_model/excess_data/

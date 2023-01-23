@@ -1,7 +1,7 @@
 from dash import Dash, html, dcc, Input, Output, State, ctx
 import dash_bootstrap_components as dbc
 from create_app import app
-from single_upload import single_upload
+from upload_single import single_upload
 
 
 menu_row = dbc.Row(
