@@ -77,7 +77,7 @@ def callback_on_completion(status: UploadStatus):
     return [top_k_predictions(pred), show_image(path)]
 
 
-def show_image(con .tents):
+def show_image(contents):
     image = html.Div([
                 dbc.Row([
                     # Should have maximum size of image
