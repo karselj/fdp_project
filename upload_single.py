@@ -45,36 +45,27 @@ single_upload = html.Div([
     ])
 ])
 
-"""dcc.Upload(
-    id="upload_single",
-    className="upload_file",
-    filename="",
-    accept="",
-    contents="",
-    multiple=False,
-    children=[
-        html.Button(
-            "Select a file",
-            id="btn_upload_single",
-            className="btn_upload",
-            disabled=False,
-            n_clicks=0
-        )
-    ]
-)"""
+def pretty_output(dict):
+    """takes the top_k_prediction as input (dict) 
+    and outputs the result
+    in a more readable way"""
 
-# https://github.com/np-8/dash-uploader/blob/dev/docs/dash-uploader.md#duupload
-@du.callback(
-    output=Output("result", "children"),
-    id="upload_single",
-)
-def callback_on_completion(status: UploadStatus):
-    path = str(status.latest_file)
+    temp = list()
+    for key, value in dict.items():
+        # don't show values that are smaller than 1%
+        if value > 0.009:
+            temp.append([key, value])
 
-    preprocessed_image = prepare_image(path)
-    pred = model.predict(preprocessed_image)
-    print(path)
-    return [top_k_predictions(pred), show_image(path)]
+    pretty = dbc.Row([
+        dbc.Col([
+            dbc.Row(html.H4(temp[r][0])) for r in range(0, len(temp))
+        ]),
+        dbc.Col([
+            dbc.Row(html.H4(temp[r][1])) for r in range(0, len(temp))
+        ])
+    ])
+
+    return pretty
 
 
 def show_image(contents):
@@ -82,7 +73,6 @@ def show_image(contents):
                 dbc.Row([
                     # Should have maximum size of image
                     Image(filename=contents)
-                    
                 ],
                 justify="center"
                 )
@@ -90,20 +80,20 @@ def show_image(contents):
     return image
 
 
-"""@app.callback(
-    Output("div_image_output", "children"),
-    Input("upload_single", "contents"),
-    Input("upload_single", "filename"),
-    Input("btn_upload_single", "n_clicks")
+# Callback to get image and run it through the machine learning model
+# https://github.com/np-8/dash-uploader/blob/dev/docs/dash-uploader.md#duupload
+@du.callback(
+    output=Output("result", "children"),
+    id="upload_single",
 )
-def function(contents, filename, n_clicks):
+def callback_on_completion(status: UploadStatus):
     button_clicked = ctx.triggered_id
+
     if not button_clicked:
-        print("im here")
         raise PreventUpdate
-    else:
-        img = convert_image(contents)
-        preprocessed_image = prepare_image(img)
-        pred = model.predict(preprocessed_image)
-        
-        return top_k_predictions(pred), show_image(contents, filename)"""
+
+    path = str(status.latest_file)
+    preprocessed_image = prepare_image(path)
+    pred = model.predict(preprocessed_image)
+
+    return pretty_output(top_k_predictions(pred))
