@@ -1,99 +1,70 @@
-from dash import Dash, html, dcc, Input, Output, State, ctx
+from dash import Dash, html, dcc, Input, Output, State, ctx, no_update
 import dash_bootstrap_components as dbc
 from create_app import app
 from dash.exceptions import PreventUpdate
-from load_model import prepare_image, top_k_predictions, model
+from load_model import prepare_image, top_k_pred, model, top_k_pred_pretty
 import dash_uploader as du
 from dash_uploader import UploadStatus
-from IPython.display import Image
+from PIL import Image
+import os
+import base64
+import numpy as np
 
 du.configure_upload(app, r'tmp/uploads')
-single_upload = html.Div([
-    dbc.Row(
-        children=[
-            dbc.Col("hello"),
-            dbc.Col("goodbye")
-        ]
-    ),
-    # ---- Upload section -----
-    dbc.Row([
-        dbc.Col(
-            dbc.Row([
-                # input field
-                du.Upload(
-                    id="upload_single",
-                    text="Select a file",
-                    text_completed="Uploaded: ",
-                    filetypes=["jpeg", "jpg", "png", "JPG", "JPEG", "PNG"]
-                )
-            ]),
-        )
-    ],
-    justify="center",
-    align="evenly"
-    ),
 
+single_upload = html.Div([
+
+    # ---- Upload section ----
     dbc.Row([
-        dbc.Col(
-            html.Div(
-                id="div_image_output",
-                children=[
-                    html.H2(id="result", children=[])
-                ]
-            )
+        dcc.Store(id="single_image_session", storage_type="session"),
+        dcc.Upload(
+            id="upload_single",
+            className="upload_file",
+            filename="",
+            accept="",
+            contents="",
+            multiple=False,
+            children=[
+                html.Button(
+                    "Select a file",
+                    id="btn_upload_single",
+                    className="btn_upload",
+                    disabled=False,
+                    n_clicks=0
+                )
+            ]
         )
-    ])
+    ]),
+
+    # ---- Show the results ----
+    dbc.Row(
+        children = [
+            dbc.Col([
+                html.Div(id="result_single_pred", children=[]),
+                html.Div(id="result_single_img", children=[])
+            ]),
+            dbc.Col(
+                html.Div(id="result_single_img")
+            )
+        ]
+    )
 ])
 
-def pretty_output(dict):
-    """takes the top_k_prediction as input (dict) 
-    and outputs the result
-    in a more readable way"""
-
-    temp = list()
-    for key, value in dict.items():
-        # don't show values that are smaller than 1%
-        if value > 0.009:
-            temp.append([key, value])
-
-    pretty = dbc.Row([
-        dbc.Col([
-            dbc.Row(html.H4(temp[r][0])) for r in range(0, len(temp))
-        ]),
-        dbc.Col([
-            dbc.Row(html.H4(temp[r][1])) for r in range(0, len(temp))
-        ])
-    ])
-
-    return pretty
 
 
-def show_image(contents):
-    image = html.Div([
-                dbc.Row([
-                    # Should have maximum size of image
-                    Image(filename=contents)
-                ],
-                justify="center"
-                )
-            ])
-    return image
+def show_image(path):
+    return html.Img(src=path)
+     
 
-
-# Callback to get image and run it through the machine learning model
-# https://github.com/np-8/dash-uploader/blob/dev/docs/dash-uploader.md#duupload
-@du.callback(
-    output=Output("result", "children"),
-    id="upload_single",
-)
-def callback_on_completion(status: UploadStatus):
-    button_clicked = ctx.triggered_id
-
-    if not button_clicked:
+@app.callback(
+    Output("result_single_img", "children"),
+    Output("result_single_pred", "children"),
+    Input("upload_single", "contents"),
+    Input("btn_upload_single", "n_clicks"))
+def function(contents, n_clicks):
+    while contents == "":               # don't proceed until user has selected a photo
         raise PreventUpdate
 
-    path = str(status.latest_file)
-    preprocessed_image = prepare_image(path)
+    preprocessed_image = prepare_image(contents)
     pred = model.predict(preprocessed_image)
-
-    return pretty_output(top_k_predictions(pred))
+    return show_image(contents), top_k_pred_pretty(top_k_pred(pred))

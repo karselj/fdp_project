@@ -6,6 +6,7 @@
 
 body {
     background-color: var(--beige);
+    font-family: "Monaco", monospace;
 }
 
 h1 {

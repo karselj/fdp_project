@@ -1,33 +1,42 @@
-import numpy as np
-import io
 import base64
-from PIL import Image
+import numpy as np
+from io import BytesIO
 from operator import itemgetter
+
 from dash import html
+import dash_bootstrap_components as dbc
 
-import tensorflow as tf
 from tensorflow import keras
-
-from keras.applications import imagenet_utils
 from keras.applications.densenet import preprocess_input
-
-from keras.preprocessing.image import ImageDataGenerator
 from keras.utils import img_to_array, load_img
 
 
 
 # Modified code from deeplizard - https://www.youtube.com/playlist?list=PLZbbT5o_s2xrwRnXk_yCPtnqqo4_u2YGL
-def prepare_image(image):
-    """Need as input the filepath of the image."""
-    img = load_img(image, target_size=(224, 224))
-    img_array = img_to_array(img)
-    img_array_expanded_dims = np.expand_dims(img_array, axis=0)
-    
+# Added some code from tensorflow - https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img 
+def prepare_image(contents):
+    """Need as input the filepath of the image.
+    Prepare image to be used as input in a densenet model."""
+
+    contents = contents.replace('data:image/jpeg;base64,', '')      # clean up data bytes string
+    contents = base64.b64decode(contents)                           # decode from base64
+
+    img = BytesIO(contents)                                         # convert to BytesIO object
+
+    load = load_img(img, target_size=(224, 224))                    # load resized BytesIO object/image into PIL format
+    img_array = img_to_array(load)                                  # convert image to numpy array
+    img_array_expanded_dims = np.array([img_array])                 # convert single image to batch
+
     return preprocess_input(img_array_expanded_dims)
 
+    
 
-# Function to get top 5 results from each test round
-def top_k_predictions(pred, top_k=5):
+# Function to get top results from each test round
+def top_k_pred(pred, top_k=5):
+    """Get the top-5 predictions for a given image.
+    pred: results from model.predict()
+    Returns a dictionary of results in format 'animal':'prediction' """
+
     classes = ['hippopotamus', 'secretarybird', 'wildebeest', 'giraffe', 'zebra', 'leopard', 'waterbuck', 
     'warthog', 'impala', 'hyena', 'cheetah', 'monkeyvervet', 'buffalo', 'eland', 'baboon', 'lion', 'elephant']
 
@@ -37,8 +46,44 @@ def top_k_predictions(pred, top_k=5):
 
         for j in range(top_k):
             total[classes[indices[j]]] = L_sorted[j]
-    print(str(total))
+
     return total
+
+
+
+def top_k_pred_pretty(dict):
+    """Takes the top_k_pred results as input (dict) and outputs the result
+    in a more readable way"""
+
+    temp = list()
+    for key, value in dict.items():
+        # don't show values that are smaller than 1%
+        if value > 0.009:
+            temp.append([key, value])
+
+    pretty = html.Div(
+        dbc.Row(
+            dbc.Col(
+                width={"size": 3},
+                children = [
+                    dbc.Row(html.H3("Results")),
+                    dbc.Row([
+                        dbc.Col([
+                            dbc.Row(html.H4(temp[r][0])) for r in range(0, len(temp))
+                        ]),
+                        dbc.Col([
+                            dbc.Row(html.H4(temp[r][1])) for r in range(0, len(temp))
+                        ])
+                    ],
+                    justify="between"
+                    )
+                ]
+            ),
+            justify="center"
+        )
+    )
+
+    return pretty
 
 
 model = keras.models.load_model("ml_model/models/densenet121_v1.h5")
