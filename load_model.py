@@ -2,6 +2,7 @@ import base64
 import numpy as np
 from io import BytesIO
 from operator import itemgetter
+from zipfile import ZipFile
 
 from dash import html
 import dash_bootstrap_components as dbc
@@ -23,9 +24,10 @@ model = keras.models.load_model("ml_model/models/densenet121_v1.h5")
 def prepare_single_image(contents):
     """Need as input the filepath of the image.
     Prepare image to be used as input in a densenet model."""
-
-    contents = contents.replace('data:image/jpeg;base64,', '')      # clean up data bytes string
-    contents = base64.b64decode(contents)                           # decode from base64
+    print(type(contents))
+    if type(contents) == str:
+        contents = contents.replace('data:image/jpeg;base64,', '')      # clean up data bytes string
+        contents = base64.b64decode(contents)                           # decode from base64
 
     img = BytesIO(contents)                                         # convert to BytesIO object
 
@@ -87,4 +89,33 @@ def top_k_pred_pretty(dict):
     return pretty
 
 
-# ------ Multi Image Upload ------------------------------------------------------------------------------------------
+# ------ Zip Folder Upload ------------------------------------------------------------------------------------------
+
+# Modified code from:
+# https://stackoverflow.com/questions/60729575/how-to-handle-uploaded-zip-file-in-dash-plotly
+def read_zip(contents):
+    content_string = contents.replace('data:application/zip;base64,', '')
+
+    try:
+        len(content_string)%4 == 0
+    except:
+        raise Exception
+
+    content_decoded = base64.b64decode(content_string)
+    # Use BytesIO to handle the decoded content
+    zip_str = BytesIO(content_decoded)
+    # Now you can use ZipFile to take the BytesIO output
+    zip_obj = ZipFile(zip_str, 'r')
+
+
+    predictions = dict()
+
+    with ZipFile(zip_str, "r") as folder:
+        for img in folder.namelist():
+
+            preprocessed_image = prepare_single_image(folder.read(img))
+            pred = model.predict(preprocessed_image)
+            predictions[img] = top_k_single(pred)
+
+    return predictions, len(predictions)
+
