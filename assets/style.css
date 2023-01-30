@@ -1,3 +1,13 @@
+/*
+https://www.w3schools.com/css/css_selectors.asp 
+- The element selector selects HTML elements based on the element name. E.g. p, h1, body, div
+- The id selector uses the id attribute of an HTML element to select a specific element. To 
+select an element with a specific id, write a hash (#) character, followed by the id of the element.
+- The class selector selects HTML elements with a specific class attribute. To select elements 
+with a specific class, write a period (.) character, followed by the class name.
+*/
+
+
 :root {
     --light_beige: #F3E2D2;
     --beige: #AFA195;
@@ -11,16 +21,17 @@ body {
 
 h1 {
     color: white;
-    text-align: center;
 }
 h2 {
     color: white;
-    text-align: center;
 }
 h4 {
     color: var(--beige);
-    text-align: center;
     font-size: medium;
+}
+
+h4.pred_result {
+    text-align: right;
 }
 
 p {
@@ -41,7 +52,7 @@ a {
 .btn_home {
     background-color: var(--brown);
     border: 0px solid;
-    width:auto;
+    width: auto;
     font-size: xx-large;
     color: white;
 }
@@ -64,7 +75,17 @@ a {
     border: 1px solid var(--brown);
 }
 
-.upload_file {
+.btn_upload {
+    text-align: center;
+    border: 1px solid var(--beige);
+    border-radius: 0px;
+    background-color: var(--brown);
+    color: white;
+    width: auto;
+    padding: 10px;
+}
+
+/*.upload_file {
     width: 100%;
     height: 60px;
     line-height: 60px;
@@ -73,8 +94,10 @@ a {
     text-align: center;
     color: var(--light_beige);
     margin: 10px 0px;
-}
+}*/
 
-.show_image {
-    width: 90%;
+
+.img_show_one {
+    max-height: 400px;
+    max-width: 100%;
 }

@@ -12,9 +12,15 @@ from keras.utils import img_to_array, load_img
 
 
 
+# Load model
+model = keras.models.load_model("ml_model/models/densenet121_v1.h5")
+
+
+
+# ------ Single Image Upload ------------------------------------------------------------------------------------------
 # Modified code from deeplizard - https://www.youtube.com/playlist?list=PLZbbT5o_s2xrwRnXk_yCPtnqqo4_u2YGL
 # Added some code from tensorflow - https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img 
-def prepare_image(contents):
+def prepare_single_image(contents):
     """Need as input the filepath of the image.
     Prepare image to be used as input in a densenet model."""
 
@@ -30,9 +36,8 @@ def prepare_image(contents):
     return preprocess_input(img_array_expanded_dims)
 
     
-
 # Function to get top results from each test round
-def top_k_pred(pred, top_k=5):
+def top_k_single(pred, top_k=5):
     """Get the top-5 predictions for a given image.
     pred: results from model.predict()
     Returns a dictionary of results in format 'animal':'prediction' """
@@ -50,7 +55,6 @@ def top_k_pred(pred, top_k=5):
     return total
 
 
-
 def top_k_pred_pretty(dict):
     """Takes the top_k_pred results as input (dict) and outputs the result
     in a more readable way"""
@@ -61,29 +65,26 @@ def top_k_pred_pretty(dict):
         if value > 0.009:
             temp.append([key, value])
 
-    pretty = html.Div(
+    pretty = html.Div([
         dbc.Row(
-            dbc.Col(
-                width={"size": 3},
-                children = [
-                    dbc.Row(html.H3("Results")),
-                    dbc.Row([
-                        dbc.Col([
-                            dbc.Row(html.H4(temp[r][0])) for r in range(0, len(temp))
-                        ]),
-                        dbc.Col([
-                            dbc.Row(html.H4(temp[r][1])) for r in range(0, len(temp))
-                        ])
-                    ],
-                    justify="between"
-                    )
-                ]
-            ),
-            justify="center"
+            justify="left",
+            children=[dbc.Col(html.H3("Results"))]
+        ),
+        dbc.Row(
+            justify="left",
+            children=[
+                dbc.Col([
+                    # display the predicted species
+                    dbc.Row(html.H4(temp[r][0].capitalize())) for r in range(0, len(temp))
+                ]),
+                dbc.Col([
+                    # display the prediction for each species 
+                    dbc.Row(html.H4(f"{round(temp[r][1]*100,2)}"+" %", className="pred_result")) for r in range(0, len(temp))
+                ])
+            ]
         )
-    )
-
+    ])
     return pretty
 
 
-model = keras.models.load_model("ml_model/models/densenet121_v1.h5")
+# ------ Multi Image Upload ------------------------------------------------------------------------------------------

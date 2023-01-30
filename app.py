@@ -1,45 +1,38 @@
 from dash import Dash, html, dcc, Input, Output
-from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 from menu import menu_row
 from create_app import app
-from PIL import Image
-import numpy as np
 
-from tensorflow import keras
+
 
 
 app.layout = dbc.Container([
-    # Header
-    dbc.Row([
-        dbc.Col(
-            html.Div(
-                className="section_div",
-                children=[
-                    dbc.Row(
-                        justify="evenly",
-                        children=[
-                            html.Button(
-                                "WILDLIFE IMAGE CLASSIFICATION",
-                                id="btn_home",
-                                className="btn_home"
-                            )
-                        ]
-                    ),
-                    dbc.Row(
-                        justify="evenly",
-                        children=[
-                            html.H4("this is a short description of the app")
-                        ]
-                    )
-                ]
-            )
-        )
-    ],
-    justify="center"
+    # ---- Header and description ----
+    dbc.Row(
+        className="section_div",
+        children=[
+            dbc.Col([
+                dbc.Row(
+                    justify="center",
+                    children=[
+                        html.Button(
+                            "WILDLIFE IMAGE CLASSIFICATION",
+                            id="btn_home",
+                            className="btn_home"
+                        )
+                    ]
+                ),
+                dbc.Row(
+                    justify="center",
+                    children=[
+                        html.H4("this is a short description of the app that should be centered")
+                    ]
+                )
+            ])
+        ]
     ),
 
-    # Menu
+    # ---- Menu ----
     dbc.Row([
         dbc.Col(
             html.Div(

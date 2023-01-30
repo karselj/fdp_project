@@ -2,6 +2,7 @@ from dash import Dash, html, dcc, Input, Output, State, ctx
 import dash_bootstrap_components as dbc
 from create_app import app
 from upload_single import single_upload
+from upload_multi import multi_upload
 
 
 menu_row = dbc.Row(
@@ -61,7 +62,7 @@ def update_output_div(info, single, multi, home):
     elif btn_clicked == "btn_single_upload":
         return single_upload
     elif btn_clicked == "btn_multi_upload":
-        return "Multi"
+        return multi_upload
     elif btn_clicked == "btn_home":
         return "homepage"
     else:
