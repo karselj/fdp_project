@@ -15,8 +15,7 @@ menu_row = dbc.Row(
                 "Info",
                 id="btn_info",
                 className="btn_menu",
-                style={"borderRadius": "10px 0px 0px 0px"},
-                disabled=False
+                style={"borderRadius": "10px 0px 0px 0px"}
             ),
             width=4
         ),
@@ -24,8 +23,7 @@ menu_row = dbc.Row(
             html.Button(
                 "Single Upload",
                 id="btn_single_upload",
-                className="btn_menu",
-                disabled=False
+                className="btn_menu"
             ),
             width=4
         ),
@@ -34,8 +32,7 @@ menu_row = dbc.Row(
                 "Multi Upload",
                 id="btn_multi_upload",
                 className="btn_menu",
-                style={"borderRadius": "0px 10px 0px 0px"},
-                disabled=False
+                style={"borderRadius": "0px 10px 0px 0px"}
             ),
             width=4
         )

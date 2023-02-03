@@ -12,7 +12,7 @@ app.layout = dbc.Container([
     dbc.Row(
         html.Div([
             html.Div(
-                style={"justifyContent":"center", "display":"flex", "alignItems":"center"},
+                style={"display":"flex", "alignItems":"center"},
                 children=[
                     html.Button(
                         "WILDLIFE IMAGE CLASSIFICATION",
@@ -21,6 +21,7 @@ app.layout = dbc.Container([
                     )
                 ]
             ),
+            html.Hr(),
             html.H4("this is a short description of the app that should be centered")
         ])
     ),

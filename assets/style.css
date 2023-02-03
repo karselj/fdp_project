@@ -59,6 +59,7 @@ a {
 
 hr {
     border: 1px solid var(--scarlet);
+    margin-top: 0px;
 }
 
 
@@ -78,7 +79,7 @@ hr {
 
 .btn_home {
     background-color: transparent;
-    border: 0px solid;
+    border: 0px;
     width: auto;
     font-size: xxx-large;
     color: var(--scarlet);
@@ -87,7 +88,7 @@ hr {
 
 
 .btn_menu {
-    border-bottom: 0px solid var(--green3);
+    border: 0px solid var(--green3);
     border-radius: 0px;
     background-color: var(--green3);
     color: white; 
