@@ -7,53 +7,43 @@ from create_app import app
 
 
 app.layout = dbc.Container([
+    html.Br(),
     # ---- Header and description ----
     dbc.Row(
-        className="section_div",
+        html.Div([
+            html.Div(
+                style={"justifyContent":"center", "display":"flex", "alignItems":"center"},
+                children=[
+                    html.Button(
+                        "WILDLIFE IMAGE CLASSIFICATION",
+                        id="btn_home",
+                        className="btn_home"
+                    )
+                ]
+            ),
+            html.H4("this is a short description of the app that should be centered")
+        ])
+    ),
+    dbc.Row(
+        className="g-0",
+        justify="center",
         children=[
-            dbc.Col([
-                dbc.Row(
-                    justify="center",
-                    children=[
-                        html.Button(
-                            "WILDLIFE IMAGE CLASSIFICATION",
-                            id="btn_home",
-                            className="btn_home"
-                        )
-                    ]
-                ),
-                dbc.Row(
-                    justify="center",
-                    children=[
-                        html.H4("this is a short description of the app that should be centered")
-                    ]
-                )
-            ])
+            html.Div(
+                className="section_div",
+                children=[
+                    # ---- Menu ----
+                    menu_row,
+                    # ---- Contents ----
+                    html.Div(
+                        id="div_contents",
+                        className="contents_div",
+                        children=[]
+                    )
+                ]
+            )
         ]
     ),
-
-    # ---- Menu ----
-    dbc.Row([
-        dbc.Col(
-            html.Div(
-                menu_row,
-                className="section_div"
-            )
-        )
-    ],
-    justify="evenly"
-    ),
-
-    # Contents section
-    dbc.Row([
-        dbc.Col(
-            html.Div(
-                id="div_contents",
-                className="section_div",
-                children=[]
-            )
-        )
-    ])
+    html.Br()
 ])
 
 

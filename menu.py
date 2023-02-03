@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 from create_app import app
 from upload_single import single_upload
 from upload_multi import multi_upload
+from information import information
 
 
 menu_row = dbc.Row(
@@ -14,9 +15,8 @@ menu_row = dbc.Row(
                 "Info",
                 id="btn_info",
                 className="btn_menu",
-                style={"display":"block"},
-                disabled=False,
-                n_clicks=0
+                style={"borderRadius": "10px 0px 0px 0px"},
+                disabled=False
             ),
             width=4
         ),
@@ -25,9 +25,7 @@ menu_row = dbc.Row(
                 "Single Upload",
                 id="btn_single_upload",
                 className="btn_menu",
-                style={"display":"block"},
-                disabled=False,
-                n_clicks=0
+                disabled=False
             ),
             width=4
         ),
@@ -36,9 +34,8 @@ menu_row = dbc.Row(
                 "Multi Upload",
                 id="btn_multi_upload",
                 className="btn_menu",
-                style={"display":"block"},
-                disabled=False,
-                n_clicks=0
+                style={"borderRadius": "0px 10px 0px 0px"},
+                disabled=False
             ),
             width=4
         )
@@ -58,7 +55,7 @@ def update_output_div(info, single, multi, home):
     btn_clicked = ctx.triggered_id
 
     if btn_clicked == "btn_info":
-        return html.P("hello")
+        return information
     elif btn_clicked == "btn_single_upload":
         return single_upload
     elif btn_clicked == "btn_multi_upload":

@@ -115,7 +115,6 @@ multi_upload = html.Div([
 def upload(contents_img, filename_img, date_img, img_clicks,
            contents_zip, filename_zip, date_zip, zip_clicks):
 
-    print(ctx.triggered_id)
     while ctx.triggered_id == None:       # don't proceed until user has selected a photo
         raise PreventUpdate
     
@@ -127,18 +126,15 @@ def upload(contents_img, filename_img, date_img, img_clicks,
             pred = model.predict(preprocessed_image)
             predictions[filename_img[i]] = top_k_single(pred)
 
-        print(type(predictions))
         return f"{len(predictions)} images classified", predictions, {"display":"block"}
-
-    
 
     elif ctx.triggered_id == "upload_multi_zip":
 
         pred, length = read_zip(contents_zip)
-
         return f"{length} images classified", pred, {"display":"block"}
   
     return no_update, no_update, no_update
+
 
 
 # ---- Download JSON file ----

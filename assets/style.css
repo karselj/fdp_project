@@ -12,30 +12,43 @@ with a specific class, write a period (.) character, followed by the class name.
     --light_beige: #F3E2D2;
     --beige: #AFA195;
     --brown: #685D52;
+
+    --darkgray: #A9A9A9;
+    --gray: #808080;
+    --dimgray: #696969;
+    --davysgray: #555555;
+    --vdarkgray: #222222;
+
+    --scarlet: #B85042;
+    --green1: #E4E5D5;
+    --green2: #C5C8AB;
+    --green3: #A5B198;
+    --green4: #545E46;
+    --green5: #1F2D16;
 }
 
 body {
-    background-color: var(--beige);
-    font-family: "Monaco", monospace;
+    background-color: whitesmoke;
+    font-family: "Barlow", "Gill Sans", "Verdana", "Calibri", sans-serif;
+    margin: auto;
 }
 
 h1 {
-    color: white;
+    color: var(--scarlet);
 }
+
 h2 {
     color: white;
 }
-h4 {
-    color: var(--beige);
-    font-size: medium;
-}
 
-h4.pred_result {
-    text-align: right;
+h4{
+    color: var(--scarlet);
+    font-size: medium;
+    text-align: center;
 }
 
 p {
-    color: white;
+    color: var(--green3);
     font-size: small;
 }
 
@@ -44,60 +57,70 @@ a {
     cursor: pointer;
 }
 
-.section_div {
-    background-color: var(--brown);
-    margin: 10px 10px 0px 10px;
+hr {
+    border: 1px solid var(--scarlet);
 }
+
+
+.section_div {
+    background-color: var(--green1);
+    margin: 10px 10px 10px 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+
+.contents_div {
+    min-height: 600px;
+    margin: 10px 20px;
+}
+
 
 .btn_home {
-    background-color: var(--brown);
+    background-color: transparent;
     border: 0px solid;
     width: auto;
-    font-size: xx-large;
-    color: white;
+    font-size: xxx-large;
+    color: var(--scarlet);
+    margin: auto;
 }
 
+
 .btn_menu {
-    border: 1px solid var(--brown);
+    border-bottom: 0px solid var(--green3);
     border-radius: 0px;
-    background-color: var(--brown);
+    background-color: var(--green3);
     color: white; 
     width: 100%;
     padding: 10px;
 }
 .btn_menu:hover {
-    border: 1px solid var(--brown);
-    background-color: var(--beige);
-    /*color: var(--brown)*/
+    background-color: var(--green2);
+    border-bottom: 0px solid var(--green3);
+    color: var(--green4);
 }
 .btn_menu:focus {
-    background-color: var(--beige);
-    border: 1px solid var(--brown);
+    background-color: var(--green2);
+    border-bottom: 0px solid var(--green3);
+    color: var(--green4);
 }
+
 
 .btn_upload {
     text-align: center;
-    border: 1px solid var(--beige);
-    border-radius: 0px;
-    background-color: var(--brown);
+    border: 0px solid var(--green4);
+    border-radius: 30px;
+    background-color: var(--green3);
     color: white;
     width: auto;
     padding: 10px;
 }
 
-/*.upload_file {
-    width: 100%;
-    height: 60px;
-    line-height: 60px;
-    border: 1px dashed white;
-    border-radius: 5px;
-    text-align: center;
-    color: var(--light_beige);
-    margin: 10px 0px;
-}*/
-
 
 .img_show_one {
     max-height: 400px;
-    max-width: 100%;
+    max-width: 95%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

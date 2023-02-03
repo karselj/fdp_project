@@ -25,7 +25,6 @@ def prepare_single_image(contents):
     """Need as input the filepath of the image.
     Prepare image to be used as input in a densenet model."""
 
-    print(type(contents))
     if type(contents) == str:
         contents = contents.replace('data:image/jpeg;base64,', '')      # clean up data bytes string
         contents = base64.b64decode(contents)                           # decode from base64
@@ -70,23 +69,25 @@ def top_k_pred_pretty(dict):
             temp.append([key, value])
 
     pretty = html.Div([
-        dbc.Row(
-            justify="left",
-            children=[dbc.Col(html.H3("Results"))]
-        ),
-        dbc.Row(
-            justify="left",
-            children=[
-                dbc.Col([
-                    # display the predicted species
-                    dbc.Row(html.H4(temp[r][0].capitalize())) for r in range(0, len(temp))
-                ]),
-                dbc.Col([
-                    # display the prediction for each species 
-                    dbc.Row(html.H4(f"{round(temp[r][1]*100,2)}"+" %", className="pred_result")) for r in range(0, len(temp))
-                ])
-            ]
-        )
+        dbc.Row([
+            dbc.Col(html.H3("Results"))
+        ]),
+        dbc.Row([
+            dbc.Col([
+                # display the predicted species
+                html.H4(
+                    temp[r][0].capitalize(), 
+                    style={"textAlign":"left"}
+                ) for r in range(0, len(temp))
+            ]),
+            dbc.Col([
+                # display the prediction for each species 
+                html.H4(
+                    f"{round(temp[r][1]*100,2)}"+" %", 
+                    style={"textAlign":"right"}
+                ) for r in range(0, len(temp))
+            ])
+        ])
     ])
     return pretty
 

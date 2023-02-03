@@ -15,6 +15,21 @@ single_upload = html.Div([
         ]
     ),
 
+    # ---- Show the results ----
+    dbc.Row(
+        justify="evenly",
+        children=[
+            dbc.Col(  
+                html.Div(id="result_single_pred"),
+                width={"size":3, "offset":1}
+            ),
+            dbc.Col(
+                html.Div(id="result_single_img"),
+                width={"size":6, "offset":2}
+            )
+        ]
+    ),
+    html.Br(),
     # ---- Upload section ----
     dbc.Row(
         justify="center",
@@ -24,7 +39,6 @@ single_upload = html.Div([
                 children=[
                     dcc.Upload(
                         id="upload_single",
-                        #className="upload_file",
                         filename="",
                         accept="image/*",
                         contents="",
@@ -40,21 +54,6 @@ single_upload = html.Div([
                         ]
                     )
                 ]
-            )
-        ]
-    ),
-
-    # ---- Show the results ----
-    dbc.Row(
-        justify="evenly",
-        children=[
-            dbc.Col(  
-                html.Div(id="result_single_pred"),
-                width=6
-            ),
-            dbc.Col(
-                html.Div(id="result_single_img"),
-                width=6
             )
         ]
     )
