@@ -9,22 +9,23 @@ from create_app import app
 app.layout = dbc.Container([
     html.Br(),
     # ---- Header and description ----
-    dbc.Row(
-        html.Div([
-            html.Div(
-                style={"display":"flex", "alignItems":"center"},
-                children=[
-                    html.Button(
-                        "WILDLIFE IMAGE CLASSIFICATION",
-                        id="btn_home",
-                        className="btn_home"
-                    )
-                ]
-            ),
-            html.Hr(),
-            html.H4("this is a short description of the app that should be centered")
-        ])
-    ),
+    dbc.Row([
+        html.Div(
+            style={
+                "display":"flex", 
+                "alignItems":"center"
+            },
+            children=[
+                html.Button(
+                    "WILDLIFE IMAGE CLASSIFICATION",
+                    id="btn_home",
+                    className="btn_home"
+                )
+            ]
+        ),
+        html.Hr(),
+        html.H4("this is a short description of the app that should be centered")
+    ]),
     dbc.Row(
         className="g-0",
         justify="center",

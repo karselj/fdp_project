@@ -74,26 +74,44 @@ multi_upload = html.Div([
 
     # ---- Show results ----
     dbc.Row(
-        dbc.Col(
-            html.Div(
+        dbc.Col([
+            dcc.Store(id="results_store"),
+            html.Br(),
+            dcc.Loading(
+                id="loader_multi",
+                style={"display":"none"},
+                type="circle",
+                color="#A5B198",   # --green3
                 children=[
-                    dcc.Store(id="results_store"),
                     html.P(
                         id="results_multi_text",
                         children=[]
                     ),
+                    dcc.Download(id="download_json"),
                     html.Button(
                         "Download results as JSON",
                         id="btn_download_json",
                         className="btn_upload",
                         style={"display":"none"}
-                    ),
-                    dcc.Download(id="download_json")
+                    )
                 ]
             )
-        )
+        ],width="auto"),
+    justify="center"
     )
 ])
+
+
+# --- Hide loader until button is triggered -----
+@app.callback(
+    Output("loader_multi", "style"),
+    Input("btn_upload_multi", "n_clicks"),
+    Input("btn_upload_multi_zip", "n_clicks"))
+def load_multi(clicks_multi, clicks_zip):
+    while ctx.triggered_id == None:
+        raise PreventUpdate
+    print(ctx.triggered_id)
+    return {"display":"block"}
 
 
 # --- Upload multiple image files ------
@@ -105,15 +123,13 @@ multi_upload = html.Div([
     # multiple image files
     Input("upload_multi_img", "contents"),
     Input("upload_multi_img", "filename"),
-    State("upload_multi_img", "last_modified"),
     Input("btn_upload_multi", "n_clicks"),
+
     # zipped folder
     Input("upload_multi_zip", "contents"),
-    [State("upload_multi_zip", "filename"),
-    State("upload_multi_zip", "last_modified")],
     Input("btn_upload_multi_zip", "n_clicks"))
-def upload(contents_img, filename_img, date_img, img_clicks,
-           contents_zip, filename_zip, date_zip, zip_clicks):
+def upload(contents_img, filename_img, img_clicks,
+           contents_zip, zip_clicks):
 
     while ctx.triggered_id == None:       # don't proceed until user has selected a photo
         raise PreventUpdate
@@ -146,6 +162,4 @@ def download(n_clicks, predictions):
     while "btn_download_json" != ctx.triggered_id:
         raise PreventUpdate
 
-    return dict(content=str(predictions), filename="prediction_results.json")
-
-
+    return dict(content=str(predictions), filename="results.json")

@@ -16,18 +16,26 @@ single_upload = html.Div([
     ),
 
     # ---- Show the results ----
-    dbc.Row(
-        justify="evenly",
+    dcc.Loading(
+        id="loader_single",
+        style={"display":"none"},
+        type="circle",
+        color="#B85042",   # --green3
         children=[
-            dbc.Col(  
-                html.Div(id="result_single_pred"),
-                width={"size":3, "offset":1}
-            ),
-            dbc.Col(
-                html.Div(id="result_single_img"),
-                width={"size":6, "offset":2}
+            dbc.Row(
+                justify="evenly",
+                children=[
+                    dbc.Col(  
+                        html.Div(id="result_single_pred"),
+                        width={"size":3, "offset":1}
+                    ),
+                    dbc.Col(
+                        html.Div(id="result_single_img"),
+                        width={"size":6, "offset":2}
+                    )
+                ]
             )
-        ]
+        ] 
     ),
     html.Br(),
     # ---- Upload section ----
@@ -80,3 +88,13 @@ def function(contents, n_clicks):
     pred = model.predict(preprocessed_image)
 
     return top_k_pred_pretty(top_k_single(pred)), display_image(contents)
+
+
+# --- Hide loader until button is clicked -----
+@app.callback(
+    Output("loader_single", "style"),
+    Input("btn_upload_single", "n_clicks"))
+def load_single(n_clicks):
+    while "btn_upload_single" != ctx.triggered_id:
+        raise PreventUpdate
+    return {"display":"block"}
