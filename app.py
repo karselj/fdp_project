@@ -4,7 +4,8 @@ from menu import menu_row
 from create_app import app
 
 
-
+# for Heroku deployment
+server = app.server
 
 app.layout = dbc.Container([
     html.Br(),
