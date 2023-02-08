@@ -1,12 +1,8 @@
-from dash import Dash, html, dcc, Input, Output, State, no_update, ctx
+from dash import html, dcc, Input, Output, no_update, ctx
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 from create_app import app
-from load_model import model, prepare_single_image, top_k_single, read_zip
-
-import base64
-from io import BytesIO
-from zipfile import ZipFile
+from load_model import prepare_single_image, top_k_single, read_zip, model
 
 
 # https://dash.plotly.com/dash-core-components/download
@@ -110,7 +106,7 @@ multi_upload = html.Div([
 def load_multi(clicks_multi, clicks_zip):
     while ctx.triggered_id == None:
         raise PreventUpdate
-    print(ctx.triggered_id)
+    
     return {"display":"block"}
 
 

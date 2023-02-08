@@ -1,20 +1,18 @@
+from dash import html
+import dash_bootstrap_components as dbc
+
 import base64
 import numpy as np
 from io import BytesIO
 from operator import itemgetter
 from zipfile import ZipFile
 
-from dash import html
-import dash_bootstrap_components as dbc
-
-from tensorflow import keras
+from keras.models import load_model
 from keras.applications.densenet import preprocess_input
 from keras.utils import img_to_array, load_img
 
 
-
-# Load model
-model = keras.models.load_model("ml_model/models/densenet121_v1.h5")
+model = load_model("ml_model/models/densenet121_v1.h5")
 
 
 

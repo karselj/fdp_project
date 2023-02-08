@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc, Input, Output, State, ctx
+from dash import html, Input, Output, ctx
 import dash_bootstrap_components as dbc
 from create_app import app
 from index import home

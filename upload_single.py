@@ -1,8 +1,9 @@
-from dash import Dash, html, dcc, Input, Output, State, ctx, no_update
-import dash_bootstrap_components as dbc
-from create_app import app
+from dash import html, dcc, Input, Output, State, ctx
 from dash.exceptions import PreventUpdate
-from load_model import prepare_single_image, top_k_single, model, top_k_pred_pretty
+import dash_bootstrap_components as dbc
+
+from create_app import app
+from load_model import prepare_single_image, top_k_single, top_k_pred_pretty, model
 
 
 

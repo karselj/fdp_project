@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc, Input, Output
+from dash import html
 import dash_bootstrap_components as dbc
 from menu import menu_row
 from create_app import app
