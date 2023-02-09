@@ -7,12 +7,13 @@ from io import BytesIO
 from operator import itemgetter
 from zipfile import ZipFile
 
-from keras.models import load_model
+import tensorflow
+from tensorflow import keras
 from keras.applications.densenet import preprocess_input
 from keras.utils import img_to_array, load_img
 
 
-model = load_model("ml_model/models/densenet121_v1.h5")
+model = keras.models.load_model("ml_model/models/densenet121_v1.h5")
 
 
 
