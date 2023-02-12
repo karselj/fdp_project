@@ -6,7 +6,7 @@
 .vscode/
 __pycache__/
 ml_model/*
-!ml_model/model
+!ml_model/models
 tmp/
 *.pyc
 requirements(m1).txt
