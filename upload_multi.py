@@ -3,6 +3,7 @@ from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 from create_app import app
 from load_model import prepare_single_image, top_k_single, read_zip, model
+import json
 
 
 # https://dash.plotly.com/dash-core-components/download
@@ -81,11 +82,12 @@ multi_upload = html.Div([
                 children=[
                     html.P(
                         id="results_multi_text",
+                        style={"textAlign":"center"},
                         children=[]
                     ),
                     dcc.Download(id="download_json"),
                     html.Button(
-                        "Download results as JSON",
+                        "Download top-5 predictions",
                         id="btn_download_json",
                         className="btn_upload",
                         style={"display":"none"}
@@ -138,6 +140,8 @@ def upload(contents_img, filename_img, img_clicks,
             pred = model.predict(preprocessed_image)
             predictions[filename_img[i]] = top_k_single(pred)
 
+        if len(predictions) == 1:
+            return f"{len(predictions)} image classified", predictions, {"display":"block"}
         return f"{len(predictions)} images classified", predictions, {"display":"block"}
 
     elif ctx.triggered_id == "upload_multi_zip":
@@ -157,5 +161,5 @@ def upload(contents_img, filename_img, img_clicks,
 def download(n_clicks, predictions):
     while "btn_download_json" != ctx.triggered_id:
         raise PreventUpdate
-
-    return dict(content=str(predictions), filename="results.json")
+    
+    return dict(content=json.dumps(predictions, indent=4), filename="predictions.json")

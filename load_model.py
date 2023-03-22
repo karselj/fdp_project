@@ -7,7 +7,7 @@ from io import BytesIO
 from operator import itemgetter
 from zipfile import ZipFile
 
-import tensorflow
+#import tensorflow
 from tensorflow import keras
 from keras.applications.densenet import preprocess_input
 from keras.utils import img_to_array, load_img
@@ -55,6 +55,7 @@ def top_k_single(pred, top_k=5):
             total[classes[indices[j]]] = L_sorted[j]
 
     return total
+
 
 
 def top_k_pred_pretty(dict):

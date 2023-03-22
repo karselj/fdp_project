@@ -18,14 +18,14 @@ app.layout = dbc.Container([
             },
             children=[
                 html.Button(
-                    "WILDLIFE IMAGE CLASSIFICATION",
+                    "WILDLIFE IMAGE CLASSIFIER",
                     id="btn_home",
                     className="btn_home"
                 )
             ]
         ),
         html.Hr(),
-        html.H4("this is a short description of the app that should be centered")
+        html.H4("Discover the Wildlife of Africa - classify images with our AI-Powered Web App")
     ]),
     dbc.Row(
         className="g-0",
