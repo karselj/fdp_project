@@ -179,6 +179,8 @@ hr.green {
 /*table header that is child of table row that is child of table head that is child of table class*/
 .table > thead > tr > th {
     font-weight: normal;
+    border-width: 0px;
+    border-color: transparent;
 }
 .table > tbody > tr > td{
     padding: 0.2rem 0.5rem;
