@@ -17,15 +17,16 @@ multi_upload = html.Div([
             html.P(
                 className="upload_text",
                 children=[
-                    """Identify the animals in your images with just a few clicks!
+                    """Identify the animals in your photos with just a few clicks!
                     Select multiple photos or a zipped folder of photos, upload
                     them to our Wildlife Image Classifier and our AI model will 
-                    analyze it to determine what species is present in each image 
-                    with a percentage of likelihood. Our easy-to-use interface 
-                    makes it simple to upload and classify your images quickly 
-                    and accurately. When the model has classified all images, click
-                    the download button to get the predictions in a JSON file. 
-                    To classify a single photo, go to the page for single upload."""
+                    analyze them to determine what species is present in each image. 
+                    Our easy-to-use interface makes it simple to upload and 
+                    classify your images quickly and accurately. When the model 
+                    has classified all images, click the download button to get 
+                    the predictions for each photo in JSON format. To 
+                    quickly classify a single photo, go to the page for single 
+                    upload."""
                 ]
             )
         ]

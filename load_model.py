@@ -62,47 +62,14 @@ def top_k_single(pred, top_k=5):
 
 def top_k_table(dict):
     """Takes the top_k_pred results as input (dict) and outputs the result
-    in a more readable way"""
+    in a dataframe"""
 
-    # temp = list()
-    # for key, value in dict.items():
-    #     # don't show values that are smaller than 1%
-    #     if value > 0.009:
-    #         temp.append([key, value])
-    # print(dict)
-
-    # df = pd.DataFrame(columns=["Species", "Prediction"])
-    # for key, value in dict.items():
-    #     df = df.append({"Species": key, "Prediction": value}, ignore_index=True)
     df = pd.DataFrame(columns=["Species", "Prediction"])
 
     for key, value in dict.items():
         if value > 0.009:
             df2 = pd.DataFrame([[key.capitalize(), (f"{round(value*100,2)} %")]], columns=["Species", "Prediction"])
             df = pd.concat([df, df2])
-
-
-    # pretty = html.Div([
-    #     dbc.Row([
-    #         dbc.Col(html.H3("Results"))
-    #     ]),
-    #     dbc.Row([
-    #         dbc.Col([
-    #             # display the predicted species
-    #             html.H4(
-    #                 temp[r][0].capitalize(), 
-    #                 style={"textAlign":"left"}
-    #             ) for r in range(0, len(temp))
-    #         ]),
-    #         dbc.Col([
-    #             # display the prediction for each species 
-    #             html.H4(
-    #                 f"{round(temp[r][1]*100,2)}"+" %", 
-    #                 style={"textAlign":"right"}
-    #             ) for r in range(0, len(temp))
-    #         ])
-    #     ])
-    # ])
 
     return df
 

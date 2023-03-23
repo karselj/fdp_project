@@ -15,13 +15,13 @@ single_upload = html.Div([
             html.P(
                 className="upload_text",
                 children=[
-                    """Identify the animal in your image with just a few clicks!
+                    """Identify the animal in your photo with just a few clicks!
                     Upload a single photo to our Wildlife Image Classifier 
                     and our AI model will analyze it to determine what species 
-                    is present in the image with a percentage of likelihood. Our 
+                    is present in the image. Our 
                     easy-to-use interface makes it simple to upload and classify 
-                    your images quickly and accurately. To get multiple photos
-                    classified at the same, go to the page for multi upload. """
+                    your photos quickly and accurately. To get multiple photos
+                    classified at the same time, go to the page for multi upload. """
                 ]
             )
         ]
@@ -105,7 +105,7 @@ def return_prediction(contents, n_clicks):
 
     table = dbc.Table.from_dataframe(
         top_k_table(top_k_single(pred)),
-        class_name="table_results",           
+        class_name="table table_results",           
         striped=True,
         bordered=True,
         hover=True)

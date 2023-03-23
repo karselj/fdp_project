@@ -33,39 +33,37 @@ h3 {
 }
 
 h3.index {
-    color: var(--green3);
     padding: 0;
     margin: 5% 0;
-    line-height: 30px;
     width: 100%;
-    font-weight: normal;
+    color: var(--green4);
+    font-weight: lighter;
+    text-align: justify;
     text-align-last: center;
 }
 
 h4{
-    color: var(--scarlet);
+    color: var(--green4);
     font-size: medium;
     text-align: center;
 }
 
 
 p {
-    color: var(--green3);
+    color: var(--green4);
     font-size: medium;
+    font-weight: lighter;
 }
 
 p.upload_text {
     text-align: justify;
     /*text-align-last: center;*/
-    font-weight: lighter;
     line-height: 25px;
     margin: 2% 5%;
-    color: var(--green4)
+    
 }
 
-p.download_text {
-    color: var(--green4)
-}
+/*p.download_text{}*/
 
 a {
     font-weight: bold;
@@ -165,23 +163,59 @@ hr.green {
     margin-right: auto;
 }
 
-.table_results {
-    --bs-table-color: var(--scarlet);
+
+.table {
+    margin-bottom: 1rem;
+    font-weight: lighter;
+    vertical-align: top;
+    text-align: left;
     --bs-table-bg: transparent;
-    --bs-table-border-color: var(--bs-border-color);
     --bs-table-accent-bg: transparent;
+    --bs-table-hover-color: var(--green4);
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+    border-style: hidden;
+    border-color: transparent;
+}
+/*table header that is child of table row that is child of table head that is child of table class*/
+.table > thead > tr > th {
+    font-weight: normal;
+}
+.table > tbody > tr > td{
+    padding: 0.2rem 0.5rem;
+}
+.table > tbody > tr > td + td, .table > thead > tr > th + th{
+    text-align: right;
+}
+
+
+.table_results > tbody > tr > td {
+    min-width: 150px;
+    color: var(--scarlet);
+    --bs-table-color: var(--scarlet);
+    --bs-table-border-color: var(--bs-border-color);
     --bs-table-striped-color: var(--scarlet);
     --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
     --bs-table-active-color: var(--scarlet);
     --bs-table-active-bg: rgba(0, 0, 0, 0.1);
-    --bs-table-hover-color: var(--green4);
-    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
-    width: 100%;
-    min-width: 400px;
-    margin-bottom: 1rem;
+    width: 80%;
+}
+.table_results > thead > tr > th {
     color: var(--scarlet);
-    font-weight: lighter;
-    vertical-align: top;
-    border-color: var(--green2);
-    text-align: left;
+}
+
+
+
+.table_information > tbody > tr > td {
+    
+    color: var(--green3);
+    --bs-table-color: var(--green3);
+    --bs-table-border-color: transparent;
+    --bs-table-striped-color: var(--green3);
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+    --bs-table-active-color: var(--green3);
+    --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+    width:80%;
+}
+.table_information > thead > tr > th{
+    color: var(--green4);
 }

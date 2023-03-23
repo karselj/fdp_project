@@ -2,6 +2,25 @@ from dash import html
 import dash_bootstrap_components as dbc
 
 home = html.Div([
+    dbc.Row([
+        dbc.Col(
+            html.Img(
+                src="assets/images/elephant_b_00007.jpg",
+                className="img_homepage"
+            ),
+            width="auto"
+        ),
+        dbc.Col(
+            html.Img(
+                src="assets/images/cheetah_S1_I13_R1_PICT0472.JPG",
+                className="img_homepage"
+            ),
+            width="auto"
+        )
+    ],
+    justify="center", 
+    align="start"
+    ),
     dbc.Row(
         dbc.Col(
             html.H3(
@@ -21,23 +40,5 @@ home = html.Div([
             width=9
         ),
         justify="center"
-    ),
-    dbc.Row([
-        dbc.Col(
-            html.Img(
-                src="assets/images/elephant_b_00007.jpg",
-                className="img_homepage"
-            ),
-            width="auto"
-        ),
-        dbc.Col(
-            html.Img(
-                src="assets/images/cheetah_S1_I13_R1_PICT0472.JPG",
-                className="img_homepage"
-            ),
-            width="auto"
-        )
-    ],
-    justify="center", 
-    align="start")
+    )
 ])
