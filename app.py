@@ -7,6 +7,7 @@ from create_app import app
 # for Heroku deployment
 server = app.server
 
+app.title = "Wildlife Classifier"
 app.layout = dbc.Container([
     html.Br(),
     # ---- Header and description ----
