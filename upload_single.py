@@ -1,9 +1,9 @@
-from dash import html, dcc, Input, Output, State, ctx
+from dash import html, dcc, Input, Output, State, ctx, no_update
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 
 from create_app import app
-from load_model import prepare_single_image, top_k_single, top_k_pred_pretty, model
+from load_model import prepare_single_image, top_k_single, top_k_table, model
 
 
 
@@ -12,9 +12,22 @@ single_upload = html.Div([
     dbc.Row(
         justify="center",
         children=[
-            html.P("This section will describe how this upload function works.")
+            html.P(
+                className="upload_text",
+                children=[
+                    """Identify the animal in your photo with just a few clicks!
+                    Upload a single photo to our Wildlife Image Classifier 
+                    and our AI model will analyze it to determine what species 
+                    is present in the image. Our 
+                    easy-to-use interface makes it simple to upload and classify 
+                    your photos quickly and accurately. To get multiple photos
+                    classified at the same time, go to the page for multi upload. """
+                ]
+            )
         ]
     ),
+    html.Hr(className="green"),
+    html.Br(),
 
     # ---- Show the results ----
     dcc.Loading(
@@ -23,22 +36,24 @@ single_upload = html.Div([
         type="circle",
         color="#B85042",   # --green3
         children=[
-            dbc.Row(
-                justify="evenly",
-                children=[
-                    dbc.Col(  
-                        html.Div(id="result_single_pred"),
-                        width={"size":3, "offset":1}
-                    ),
-                    dbc.Col(
-                        html.Div(id="result_single_img"),
-                        width={"size":6, "offset":2}
-                    )
-                ]
+            dbc.Row([
+                dbc.Col(  
+                    html.Div(id="result_single_pred"),
+                    width="auto"
+                ),
+                dbc.Col(
+                    html.Div(id="result_single_img"),
+                    width="auto"
+                )
+            ],
+            justify="center",
+            align="center"
             )
         ] 
     ),
     html.Br(),
+    html.Br(),
+
     # ---- Upload section ----
     dbc.Row(
         justify="center",
@@ -81,14 +96,23 @@ def display_image(path):
     Output("result_single_img", "children"),
     Input("upload_single", "contents"),
     Input("btn_upload_single", "n_clicks"))
-def function(contents, n_clicks):
+def return_prediction(contents, n_clicks):
     while contents == "":               # don't proceed until user has selected a photo
         raise PreventUpdate
 
     preprocessed_image = prepare_single_image(contents)
     pred = model.predict(preprocessed_image)
 
-    return top_k_pred_pretty(top_k_single(pred)), display_image(contents)
+    table = dbc.Table.from_dataframe(
+        top_k_table(top_k_single(pred)),
+        class_name="table table_results",           
+        striped=True,
+        bordered=True,
+        hover=True)
+                        
+
+
+    return table, display_image(contents)
 
 
 # --- Hide loader until button is clicked -----

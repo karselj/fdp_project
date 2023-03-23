@@ -14,7 +14,7 @@ menu_row = dbc.Row(
     children = [
         dbc.Col(
             html.Button(
-                "Info",
+                "Information",
                 id="btn_info",
                 className="btn_menu",
                 style={"borderRadius": "10px 0px 0px 0px"}

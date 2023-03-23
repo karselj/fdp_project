@@ -3,22 +3,24 @@ import dash_bootstrap_components as dbc
 
 import base64
 import numpy as np
+import pandas as pd
 from io import BytesIO
 from operator import itemgetter
 from zipfile import ZipFile
 
-import tensorflow
+#import tensorflow
 from tensorflow import keras
 from keras.applications.densenet import preprocess_input
 from keras.utils import img_to_array, load_img
 
 
 model = keras.models.load_model("ml_model/models/densenet121_v1.h5")
+#model = keras.models.load_model("ml_model/models/densenet121_v10_newdataset.h5")
 
 
 
 # ------ Single Image Upload ------------------------------------------------------------------------------------------
-# Modified code from deeplizard - https://www.youtube.com/playlist?list=PLZbbT5o_s2xrwRnXk_yCPtnqqo4_u2YGL
+# prepare_single_image function - modified code from deeplizard - https://www.youtube.com/playlist?list=PLZbbT5o_s2xrwRnXk_yCPtnqqo4_u2YGL
 # Added some code from tensorflow - https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img 
 def prepare_single_image(contents):
     """Need as input the filepath of the image.
@@ -57,38 +59,19 @@ def top_k_single(pred, top_k=5):
     return total
 
 
-def top_k_pred_pretty(dict):
+
+def top_k_table(dict):
     """Takes the top_k_pred results as input (dict) and outputs the result
-    in a more readable way"""
+    in a dataframe"""
 
-    temp = list()
+    df = pd.DataFrame(columns=["Species", "Prediction"])
+
     for key, value in dict.items():
-        # don't show values that are smaller than 1%
         if value > 0.009:
-            temp.append([key, value])
+            df2 = pd.DataFrame([[key.capitalize(), (f"{round(value*100,2)} %")]], columns=["Species", "Prediction"])
+            df = pd.concat([df, df2])
 
-    pretty = html.Div([
-        dbc.Row([
-            dbc.Col(html.H3("Results"))
-        ]),
-        dbc.Row([
-            dbc.Col([
-                # display the predicted species
-                html.H4(
-                    temp[r][0].capitalize(), 
-                    style={"textAlign":"left"}
-                ) for r in range(0, len(temp))
-            ]),
-            dbc.Col([
-                # display the prediction for each species 
-                html.H4(
-                    f"{round(temp[r][1]*100,2)}"+" %", 
-                    style={"textAlign":"right"}
-                ) for r in range(0, len(temp))
-            ])
-        ])
-    ])
-    return pretty
+    return df
 
 
 # ------ Zip Folder Upload ------------------------------------------------------------------------------------------
