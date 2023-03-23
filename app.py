@@ -25,7 +25,7 @@ app.layout = dbc.Container([
             ]
         ),
         html.Hr(),
-        html.H4("Discover the Wildlife of Africa - classify images with our AI-Powered Web App")
+        html.H3("Discover the Wildlife of Africa")
     ]),
     dbc.Row(
         className="g-0",

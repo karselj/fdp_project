@@ -26,13 +26,20 @@ h2 {
     color: black;
 }
 
-h3.index {
-    line-height: 30px;
+h3 {
     font-size: large;
-    text-align: justify;
-    padding-left: 5%;
-    padding-top: 10%;
+    color: var(--scarlet);
+    text-align: center;
+}
+
+h3.index {
     color: var(--green3);
+    padding: 0;
+    margin: 5% 0;
+    line-height: 30px;
+    width: 100%;
+    font-weight: normal;
+    text-align-last: center;
 }
 
 h4{
@@ -44,7 +51,20 @@ h4{
 
 p {
     color: var(--green3);
-    font-size: small;
+    font-size: medium;
+}
+
+p.upload_text {
+    text-align: justify;
+    /*text-align-last: center;*/
+    font-weight: lighter;
+    line-height: 25px;
+    margin: 2% 5%;
+    color: var(--green4)
+}
+
+p.download_text {
+    color: var(--green4)
 }
 
 a {
@@ -55,6 +75,10 @@ a {
 hr {
     border: 1px solid var(--scarlet);
     margin-top: 0px;
+}
+
+hr.green {
+    border: 1px solid var(--green3);
 }
 
 
@@ -68,7 +92,7 @@ hr {
 
 .contents_div {
     min-height: 600px;
-    margin: 10px 20px;
+    margin: 2% 5%;
 }
 
 
@@ -112,6 +136,17 @@ hr {
     padding: 10px;
 }
 
+.btn_download {
+    text-align: center;
+    border: 1px solid var(--green3);
+    border-radius: 10px;
+    background-color: whitesmoke;
+    color: var(--green3);
+    width: auto;
+    padding: 10px;
+    font-weight: lighter;
+}
+
 
 .img_show_one {
     max-height: 400px;
@@ -119,13 +154,34 @@ hr {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 1rem;
 }
 
 .img_homepage {
-    max-width: 380px;
-    height: auto;
+    max-height: 250px;
+    width: auto;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
+}
+
+.table_results {
+    --bs-table-color: var(--scarlet);
+    --bs-table-bg: transparent;
+    --bs-table-border-color: var(--bs-border-color);
+    --bs-table-accent-bg: transparent;
+    --bs-table-striped-color: var(--scarlet);
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+    --bs-table-active-color: var(--scarlet);
+    --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+    --bs-table-hover-color: var(--green4);
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+    width: 100%;
+    min-width: 400px;
+    margin-bottom: 1rem;
+    color: var(--scarlet);
+    font-weight: lighter;
+    vertical-align: top;
+    border-color: var(--green2);
+    text-align: left;
 }

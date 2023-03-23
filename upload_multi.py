@@ -14,10 +14,54 @@ multi_upload = html.Div([
     dbc.Row(
         justify="center",
         children=[
-            html.P("This section will describe how this upload function works. Select multiple photos or a zip folder.")
+            html.P(
+                className="upload_text",
+                children=[
+                    """Identify the animals in your images with just a few clicks!
+                    Select multiple photos or a zipped folder of photos, upload
+                    them to our Wildlife Image Classifier and our AI model will 
+                    analyze it to determine what species is present in each image 
+                    with a percentage of likelihood. Our easy-to-use interface 
+                    makes it simple to upload and classify your images quickly 
+                    and accurately. When the model has classified all images, click
+                    the download button to get the predictions in a JSON file. 
+                    To classify a single photo, go to the page for single upload."""
+                ]
+            )
         ]
     ),
-
+    html.Hr(className="green"),
+    # ---- Show results ----
+    dbc.Row(
+        dbc.Col([
+            dcc.Store(id="results_store"),
+            html.Br(),
+            dcc.Loading(
+                id="loader_multi",
+                style={"display":"none"},
+                type="circle",
+                color="#A5B198",   # --green3
+                children=[
+                    html.P(
+                        id="results_multi_text",
+                        className="download_text",
+                        style={"textAlign":"center"},
+                        children=[]
+                    ),
+                    dcc.Download(id="download_json"),
+                    html.Button(
+                        "Download Top-5 predictions",
+                        id="btn_download_json",
+                        className="btn_download",
+                        style={"display":"none"}
+                    )
+                ]
+            )
+        ],width="auto"),
+    justify="center"
+    ),
+    html.Br(),
+    html.Br(),
     # ---- Upload section ----
     dbc.Row(
         justify="center",
@@ -67,35 +111,6 @@ multi_upload = html.Div([
                 ]
             )
         ]
-    ),
-
-    # ---- Show results ----
-    dbc.Row(
-        dbc.Col([
-            dcc.Store(id="results_store"),
-            html.Br(),
-            dcc.Loading(
-                id="loader_multi",
-                style={"display":"none"},
-                type="circle",
-                color="#A5B198",   # --green3
-                children=[
-                    html.P(
-                        id="results_multi_text",
-                        style={"textAlign":"center"},
-                        children=[]
-                    ),
-                    dcc.Download(id="download_json"),
-                    html.Button(
-                        "Download top-5 predictions",
-                        id="btn_download_json",
-                        className="btn_upload",
-                        style={"display":"none"}
-                    )
-                ]
-            )
-        ],width="auto"),
-    justify="center"
     )
 ])
 

@@ -23,18 +23,12 @@ results = {
 
 information = html.Div(
     children=[
-        html.P(
-            """Welcome to our wildlife image classification tool! Our tool is designed to 
-            accurately classify images captured by camera traps and benchmark images, allowing 
-            for the efficient and effective analysis of wildlife populations in their natural 
-            habitats."""
-        ),
         html.H4(
             "Features:",
             style={"textAlign":"left"}
         ),
         html.P(
-            """Advanced machine learning algorithms trained on large datasets to accurately identify and classify different species of wildlife.
+            """Advanced machine learning algorithm trained on large datasets to accurately identify and classify different species of wildlife.
             Ability to process both camera trap images and benchmark images for comprehensive analysis.
             User-friendly interface for easy navigation and image classification.
             Fast and efficient processing to minimize wait times and allow for quick and accurate results.
@@ -46,9 +40,13 @@ information = html.Div(
         ),
         html.P(
             """Our tool is designed to be used by wildlife biologists, conservationists, and other professionals 
-            working in the field of wildlife management. Simply upload your camera trap or benchmark images, and 
-            our tool will automatically classify the species present in each image. Results can be easily exported 
-            for further analysis and reporting."""
+            working in the field of wildlife management. Simply upload your image and 
+            our tool will automatically classify the species present in each image. Results containing the 
+            top-5 predicted species for each image can easily be exported in JSON format
+            for further analysis and reporting. \n Note that the model is not 100% accurate and results should be 
+            verified by a human. However, if model prediction is over 90% the species is usually predicted correctly. 
+            The model is only designed to detect one species in an image, therefore, it can be inaccurate if several
+            different species are present."""
         ),
         html.H4(
             "Benefits:",
@@ -64,12 +62,12 @@ information = html.Div(
             community. If you have any questions or feedback, please don't hesitate to contact us."""
         ),
         html.H4(
-            "Classes:",
+            "Species:",
             style={"textAlign":"left"}
         ),
         html.P(
             children=[
-                """This model has achieved varying accuracies on the different classes:""",
+                """During testing the model achieved the following accuracy per species:""",
                 html.Ul([
                     html.Li(
                         dbc.Row([
