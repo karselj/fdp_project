@@ -68,7 +68,7 @@ def top_k_table(dict):
 
     for key, value in dict.items():
         if value > 0.009:
-            df2 = pd.DataFrame([[key.capitalize(), (f"{round(value*100,2)} %")]], columns=["Species", "Prediction"])
+            df2 = pd.DataFrame([[key.capitalize(), (f"{round(value*100,2):.2f} %")]], columns=["Species", "Prediction"])
             df = pd.concat([df, df2])
 
     return df

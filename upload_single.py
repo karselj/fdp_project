@@ -104,7 +104,7 @@ def return_prediction(contents, n_clicks):
     pred = model.predict(preprocessed_image)
 
     table = dbc.Table.from_dataframe(
-        top_k_table(top_k_single(pred)),
+        top_k_table(top_k_single(pred, 10)),
         class_name="table table_results",           
         striped=True,
         bordered=True,
