@@ -164,6 +164,7 @@ hr.green {
 }
 
 
+/*Table styling*/
 .table {
     margin-bottom: 1rem;
     font-weight: lighter;
@@ -182,6 +183,10 @@ hr.green {
     border-width: 0px;
     border-color: transparent;
 }
+.table > thead {
+    border-style: hidden;
+}
+
 .table > tbody > tr > td{
     padding: 0.2rem 0.5rem;
 }
