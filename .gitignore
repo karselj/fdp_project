@@ -8,7 +8,7 @@ __pycache__/
 ml_model/*
 !ml_model/models/
 ml_model/models/*
-!ml_model/models/densenet121_v1.h5
+!ml_model/models/densenet121_v13_newdataset_v1_10.h5
 tmp/
 *.pyc
 requirements(m1).txt

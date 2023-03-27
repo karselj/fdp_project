@@ -14,8 +14,8 @@ from keras.applications.densenet import preprocess_input
 from keras.utils import img_to_array, load_img
 
 
-model = keras.models.load_model("ml_model/models/densenet121_v1.h5")
-#model = keras.models.load_model("ml_model/models/densenet121_v10_newdataset.h5")
+#model = keras.models.load_model("ml_model/models/densenet121_v1.h5")
+model = keras.models.load_model("ml_model/models/densenet121_v13_newdataset_v1_10.h5")
 
 
 
