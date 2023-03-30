@@ -20,13 +20,13 @@ multi_upload = html.Div([
                     """Identify the animals in your photos with just a few clicks!
                     Select multiple photos or a zipped folder of photos, upload
                     them to our Wildlife Image Classifier and our AI model will 
-                    analyze them to determine what species is present in each image. 
+                    analyze them to determine what species is present in each image.
                     Our easy-to-use interface makes it simple to upload and 
                     classify your images quickly and accurately. When the model 
                     has classified all images, click the download button to get 
                     the predictions for each photo in JSON format. To 
                     quickly classify a single photo, go to the page for single 
-                    upload."""
+                    upload. The model can only classify images in jpeg format!"""
                 ]
             )
         ]
@@ -74,7 +74,7 @@ multi_upload = html.Div([
                     dcc.Upload(
                         id="upload_multi_img",
                         filename="",
-                        accept="image/*",
+                        accept=".jpg",
                         contents="",
                         multiple=True,
                         children=[
@@ -144,8 +144,9 @@ def load_multi(clicks_multi, clicks_zip):
     Input("btn_upload_multi_zip", "n_clicks"))
 def upload(contents_img, filename_img, img_clicks,
            contents_zip, zip_clicks):
-
-    while ctx.triggered_id == None:       # don't proceed until user has selected a photo
+    
+    # don't proceed until user has selected a photo
+    while ctx.triggered_id == None:
         raise PreventUpdate
     
     predictions = dict()
@@ -157,8 +158,11 @@ def upload(contents_img, filename_img, img_clicks,
             predictions[filename_img[i]] = top_k_single(pred)
 
         if len(predictions) == 1:
-            return f"{len(predictions)} image classified", predictions, {"display":"block"}
-        return f"{len(predictions)} images classified", predictions, {"display":"block"}
+            return f"{len(predictions)} image classified", \
+                     predictions, {"display":"block"}
+        
+        return f"{len(predictions)} images classified", \
+                 predictions, {"display":"block"}
 
     elif ctx.triggered_id == "upload_multi_zip":
 

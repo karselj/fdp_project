@@ -1,4 +1,3 @@
-from dash import html
 import dash_bootstrap_components as dbc
 
 import base64
@@ -14,27 +13,28 @@ from keras.applications.densenet import preprocess_input
 from keras.utils import img_to_array, load_img
 
 
-#model = keras.models.load_model("ml_model/models/densenet121_v1.h5")
 model = keras.models.load_model("ml_model/models/densenet121_v13_newdataset_v1_10.h5")
 
 
 
-# ------ Single Image Upload ------------------------------------------------------------------------------------------
-# prepare_single_image function - modified code from deeplizard - https://www.youtube.com/playlist?list=PLZbbT5o_s2xrwRnXk_yCPtnqqo4_u2YGL
-# Added some code from tensorflow - https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img 
+# ------ Single Image Upload -----------------------------------------------------------
+# prepare_single_image function - modified code from deeplizard
+#     https://www.youtube.com/playlist?list=PLZbbT5o_s2xrwRnXk_yCPtnqqo4_u2YGL
+# Added some code from tensorflow 
+#     https://www.tensorflow.org/api_docs/python/tf/keras/utils/load_img 
 def prepare_single_image(contents):
     """Need as input the filepath of the image.
     Prepare image to be used as input in a densenet model."""
 
     if type(contents) == str:
-        contents = contents.replace('data:image/jpeg;base64,', '')      # clean up data bytes string
-        contents = base64.b64decode(contents)                           # decode from base64
+        contents = contents.replace('data:image/jpeg;base64,', '')  # clean up data bytes string
+        contents = base64.b64decode(contents)                       # decode from base64
     
-    img = BytesIO(contents)                                         # convert to BytesIO object
+    img = BytesIO(contents)                           # convert to BytesIO object
 
-    load = load_img(img, target_size=(224, 224))                    # load resized BytesIO object/image into PIL format
-    img_array = img_to_array(load)                                  # convert image to numpy array
-    img_array_expanded_dims = np.array([img_array])                 # convert single image to batch
+    load = load_img(img, target_size=(224, 224))      # load resized BytesIO object/image into PIL format
+    img_array = img_to_array(load)                    # convert image to numpy array
+    img_array_expanded_dims = np.array([img_array])   # convert single image to batch
 
     return preprocess_input(img_array_expanded_dims)
 
@@ -74,7 +74,7 @@ def top_k_table(dict):
     return df
 
 
-# ------ Zip Folder Upload ------------------------------------------------------------------------------------------
+# ------ Zip Folder Upload -------------------------------------------------------------
 
 # Modified code from:
 # https://stackoverflow.com/questions/60729575/how-to-handle-uploaded-zip-file-in-dash-plotly
@@ -87,18 +87,25 @@ def read_zip(contents):
         raise Exception
 
     content_decoded = base64.b64decode(content_string)
+
     # Use BytesIO to handle the decoded content
     zip_str = BytesIO(content_decoded)
-    # Now you can use ZipFile to take the BytesIO output
 
+    # Use ZipFile to take the BytesIO output
     predictions = dict()
+    valid_file_formats = ["jpg", "jpeg", "JPG", "JPEG"]
 
     with ZipFile(zip_str, "r") as folder:
+        
         for img in folder.namelist():
-            if "__MACOSX" not in img:
-                preprocessed_image = prepare_single_image(folder.read(img))
-                pred = model.predict(preprocessed_image)
-                predictions[img] = top_k_single(pred)
+
+            type_test = img.split(".")[-1]
+
+            if type_test in valid_file_formats:
+                if "__MACOSX" not in img:
+                    preprocessed_image = prepare_single_image(folder.read(img))
+                    pred = model.predict(preprocessed_image)
+                    predictions[img] = top_k_single(pred)
 
     return predictions, len(predictions)
 

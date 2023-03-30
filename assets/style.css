@@ -55,12 +55,37 @@ p {
     font-weight: lighter;
 }
 
+p.small {
+    font-size: small;
+    color: var(--green5);
+}
+
 p.upload_text {
     text-align: justify;
     /*text-align-last: center;*/
     line-height: 25px;
     margin: 2% 5%;
-    
+}
+
+a {
+    color: var(--green4);
+    font-weight: lighter;
+}
+a:hover {
+    color: var(--green5);
+    font-weight: normal;
+}
+/*all unvisited links*/
+a:link {
+    color: var(--green4);
+    font-weight: normal;
+    text-decoration: none;
+}
+/*all visited links*/
+a:visited {
+    color: var(--green4);
+    font-weight: normal;
+    text-decoration: underline;
 }
 
 /*p.download_text{}*/
@@ -188,7 +213,7 @@ hr.green {
 }
 
 .table > tbody > tr > td{
-    padding: 0.2rem 0.5rem;
+    padding: 0.15rem 0.5rem;
 }
 .table > tbody > tr > td + td, .table > thead > tr > th + th{
     text-align: right;
