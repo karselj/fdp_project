@@ -3,19 +3,23 @@ import dash_bootstrap_components as dbc
 
 home = html.Div([
     dbc.Row([
-        dbc.Col(
+        dbc.Col([
             html.Img(
                 src="assets/images/elephant_b_00007.jpg",
                 className="img_homepage"
             ),
-            width="auto"
+            html.P("Benchmark image", className="small")
+        ],
+        width="auto"
         ),
-        dbc.Col(
+        dbc.Col([
             html.Img(
                 src="assets/images/cheetah_S1_I13_R1_PICT0472.JPG",
                 className="img_homepage"
             ),
-            width="auto"
+            html.P("Camera trap image", className="small")
+        ],
+        width="auto"
         )
     ],
     justify="center", 

@@ -1,4 +1,4 @@
-from dash import html, dcc, Input, Output, State, ctx, no_update
+from dash import html, dcc, Input, Output, ctx
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 
@@ -21,7 +21,8 @@ single_upload = html.Div([
                     is present in the image. Our 
                     easy-to-use interface makes it simple to upload and classify 
                     your photos quickly and accurately. To get multiple photos
-                    classified at the same time, go to the page for multi upload. """
+                    classified at the same time, go to the page for multi upload.
+                    The model can only classify images in jpeg format!"""
                 ]
             )
         ]
@@ -64,7 +65,7 @@ single_upload = html.Div([
                     dcc.Upload(
                         id="upload_single",
                         filename="",
-                        accept="image/*",
+                        accept=".jpg",
                         contents="",
                         multiple=False,
                         children=[
@@ -97,7 +98,8 @@ def display_image(path):
     Input("upload_single", "contents"),
     Input("btn_upload_single", "n_clicks"))
 def return_prediction(contents, n_clicks):
-    while contents == "":               # don't proceed until user has selected a photo
+    # don't proceed until user has selected a photo
+    while contents == "":               
         raise PreventUpdate
 
     preprocessed_image = prepare_single_image(contents)
