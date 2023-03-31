@@ -59,7 +59,7 @@ information = html.Div(
                 images, though with varying accuracies. The camera trap training data 
                 comes from the """, 
                 html.A("Snapshot Safari", 
-                       href="www.snapshotsafari.org", 
+                       href="https://www.snapshotsafari.org", 
                        target="_blank"), 
                 """ project, therefore, this tool is designed to be used by teams 
                 across the African continent. On our test data, the model achieved 
