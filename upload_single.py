@@ -65,7 +65,7 @@ single_upload = html.Div([
                     dcc.Upload(
                         id="upload_single",
                         filename="",
-                        accept=".jpg",
+                        accept=".jpg, .jpeg",
                         contents="",
                         multiple=False,
                         children=[
