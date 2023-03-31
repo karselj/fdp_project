@@ -74,7 +74,7 @@ multi_upload = html.Div([
                     dcc.Upload(
                         id="upload_multi_img",
                         filename="",
-                        accept=".jpg",
+                        accept=".jpg, .jpeg",
                         contents="",
                         multiple=True,
                         children=[
