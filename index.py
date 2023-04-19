@@ -15,7 +15,7 @@ home = html.Div([
                     html.P("Benchmark image", className="small")
                 ),
                 dbc.Col(
-                    html.P("Source:", className="small", style={"textAlign":"right"})
+                    html.P("Source: personal collection", className="small", style={"textAlign":"right"})
                 )
             ],
             justify="between"
@@ -35,7 +35,14 @@ home = html.Div([
                     html.P("Camera trap image", className="small")
                 ),
                 dbc.Col(
-                    html.P("Source:", className="small", style={"textAlign":"right"})
+                    html.P(
+                        children=[
+                            "Source: ",
+                            html.A("Snapshot Safari", 
+                                href="https://www.snapshotsafari.org", 
+                                target="_blank"), ], 
+                        className="small", 
+                        style={"textAlign":"right"})
                 )
             ],
             justify="between"
@@ -48,23 +55,34 @@ home = html.Div([
     align="start"
     ),
     dbc.Row(
-        dbc.Col(
+        dbc.Col([
             html.H3(
                 className="index",
                 children=[
-                    """Welcome to our Wildlife Image Classifier, where 
-                    discovering the natural world has never been easier. Our 
-                    AI model can identify the most likely 
-                    animal species present in your image, whether it's a 
-                    photo from your phone, a digital camera or a camera trap. 
-                    While our app may only provide the most likely animal 
-                    classification, it's a powerful tool for helping you 
-                    automate your classification process. 
-                    Get started now and see what you can discover!"""
+                    """Welcome to this Wildlife Image Classifier. This 
+                    AI model can identify the species of wildlife present 
+                    in your image*, whether it's an image from your phone, 
+                    a digital camera or a camera trap. Get started now and 
+                    see what you can discover!"""
                 ]
             ),
-            width=9
+            html.Br(),
+            html.Br(),
+            html.Br(),
+            html.Br(),
+            html.P(
+                className="small",
+                children=[
+                    """*While this app may only provide the most likely 
+                    classification, it's a powerful tool for helping you 
+                    automate your classification process. See a list of the 
+                    performance on each animal that the model can identify 
+                    on the information page."""
+                ]
+            )
+        ],
+        width=9
         ),
-        justify="center"
+    justify="center"
     )
 ])

@@ -34,7 +34,7 @@ information = html.Div(
     dbc.Row([
         dbc.Col([
             html.P(
-                """Our tool is designed to be used by wildlife biologists, 
+                """This tool is designed to be used by researchers, biologists, 
                 conservationists, and other professionals working in the 
                 field of wildlife management. Simply upload your image and 
                 our tool will automatically classify the species present 
@@ -55,7 +55,7 @@ information = html.Div(
                        target="_blank"),  
                 """. It is trained on approximately 11,000 images of types camera trap 
                 and benchmark. We define benchmark images as images where the animal is 
-                the main focal point, for example, the first image you would get on a 
+                the main focal point, for example, the first images you would get from a 
                 google search on a species. It can therefore classify most kinds of 
                 images, though with varying accuracies. The camera trap training data 
                 comes from the """, 
@@ -65,10 +65,11 @@ information = html.Div(
                 """ project, therefore, this tool is designed to be used by teams 
                 across the African continent. On our test data, the model achieved 
                 an accuracy of 94% on benchmark images and 56% on camera trap images 
-                from unseen locations. \n Note that the model is not 100% accurate 
-                and results should be verified by a human. However, if prediction 
-                confidence is over 90% the prediction is correct 95% of the times. 
-                The model is only designed to detect one species in an image, 
+                (from unseen locations). \n Note that the model is not 100% accurate 
+                and results should always be verified by a human. However, if prediction
+                confidence is over 90% the prediction was correct 95% of the time on 
+                our test data (for all image types). 
+                The model is designed to only detect one species in an image, 
                 therefore, it can be inaccurate if several different species are 
                 present. Currently, the app can only classify images in jpeg format."""
             ]),
@@ -88,7 +89,7 @@ information = html.Div(
         ]),
         dbc.Col([
             html.H4(
-                """The achieved the following F1-Score on our test set:""",
+                """Average F1-Score on our test set:""",
                 style={"textAlign":"left"}
             ),
             html.Hr(className="green"),

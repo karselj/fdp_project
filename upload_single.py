@@ -15,14 +15,11 @@ single_upload = html.Div([
             html.P(
                 className="upload_text",
                 children=[
-                    """Identify the animal in your photo with just a few clicks!
-                    Upload a single photo to our Wildlife Image Classifier 
-                    and our AI model will analyze it to determine what species 
-                    is present in the image. Our 
-                    easy-to-use interface makes it simple to upload and classify 
-                    your photos quickly and accurately. To get multiple photos
-                    classified at the same time, go to the page for multi upload.
-                    The model can only classify images in jpeg format!"""
+                    """Identify the animal in your image with just a few clicks!
+                    Upload a single image and our AI model will analyse it to 
+                    determine what species is present in the image. To get multiple 
+                    images classified at the same time, go to the page for multi upload.
+                    (Note, the model only accepts images in jpeg format)"""
                 ]
             )
         ]

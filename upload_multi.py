@@ -6,8 +6,6 @@ from load_model import prepare_single_image, top_k_single, read_zip, model
 import json
 
 
-# https://dash.plotly.com/dash-core-components/download
-
 
 multi_upload = html.Div([
     # ---- Information about single upload ----
@@ -17,16 +15,15 @@ multi_upload = html.Div([
             html.P(
                 className="upload_text",
                 children=[
-                    """Identify the animals in your photos with just a few clicks!
-                    Select multiple photos or a zipped folder of photos, upload
-                    them to our Wildlife Image Classifier and our AI model will 
-                    analyze them to determine what species is present in each image.
-                    Our easy-to-use interface makes it simple to upload and 
-                    classify your images quickly and accurately. When the model 
-                    has classified all images, click the download button to get 
-                    the predictions for each photo in JSON format. To 
-                    quickly classify a single photo, go to the page for single 
-                    upload. The model can only classify images in jpeg format!"""
+                    """Identify the animal in your image with just a few clicks!
+                    Select multiple images or a zipped folder of images, upload
+                    them and our AI model will analyse them to determine what 
+                    species is present in each image. When the model 
+                    has classified all images, click the download button to see 
+                    the top-5 predictions for each image (in JSON file). To 
+                    quickly classify a single photo and see the results on the
+                    the screen, go to the page for single 
+                    upload. (Note, the model only accepts images in jpeg format)"""
                 ]
             )
         ]
