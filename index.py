@@ -59,7 +59,7 @@ home = html.Div([
             html.H3(
                 className="index",
                 children=[
-                    """Welcome to this Wildlife Image Classifier. This 
+                    """Welcome to the Wildlife Image Classifier. This 
                     AI model can identify the species of wildlife present 
                     in your image*, whether it's an image from your phone, 
                     a digital camera or a camera trap. Get started now and 
