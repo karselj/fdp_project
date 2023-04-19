@@ -26,7 +26,7 @@ app.layout = dbc.Container([
             ]
         ),
         html.Hr(),
-        html.H3("Discover the Wildlife of Africa")
+        html.H3("Discover the wildlife of Africa")
     ]),
     dbc.Row(
         className="g-0",
