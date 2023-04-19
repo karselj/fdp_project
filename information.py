@@ -43,16 +43,17 @@ information = html.Div(
                 in JSON format for further analysis and reporting."""
             ),
             html.H4(
-                "Technicalities:",
+                "Information:",
                 style={"textAlign":"left"}
             ),
+            html.Hr(className="green"),
             html.P([
                 """The machine learning model used in this tool is a deep neural 
                 network of the  """,
                 html.A("DenseNet-121 architecture", 
                        href="https://arxiv.org/abs/1608.06993", 
                        target="_blank"),  
-                """. It is trained on approximately 11.000 images of types camera trap 
+                """. It is trained on approximately 11,000 images of types camera trap 
                 and benchmark. We define benchmark images as images where the animal is 
                 the main focal point, for example, the first image you would get on a 
                 google search on a species. It can therefore classify most kinds of 
@@ -75,6 +76,7 @@ information = html.Div(
                 "Benefits:",
                 style={"textAlign":"left"}
             ),
+            html.Hr(className="green"),
             html.P(
                 """Reduce manual labor and time spent on classifying animals in images, 
                 and allow for more focused and effective analysis of the data. We are 
