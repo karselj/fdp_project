@@ -52,7 +52,7 @@ tensorboard==2.11.2
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.1
 tensorflow-estimator==2.11.0
-tensorflow
+tensorflow-cpu
 #tensorflow-macos
 #tensorflow-metal==0.7.1
 termcolor==2.2.0
