@@ -66,9 +66,7 @@ information = html.Div(
                 across the African continent. On our test data, the model achieved 
                 an accuracy of 94% on benchmark images and 56% on camera trap images 
                 (from unseen locations). \n Note that the model is not 100% accurate 
-                and results should always be verified by a human. However, if prediction
-                confidence is over 90% the prediction was correct 95% of the time on 
-                our test data (for all image types). 
+                and results should always be verified by a human.
                 The model is designed to only detect one species in an image, 
                 therefore, it can be inaccurate if several different species are 
                 present. Currently, the app can only classify images in jpeg format."""
