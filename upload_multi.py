@@ -23,7 +23,7 @@ multi_upload = html.Div([
                     the top-5 predictions for each image (in JSON file). To 
                     quickly classify a single photo and see the results on the
                     the screen, go to the page for single 
-                    upload. (Note, the model only accepts images in jpeg format)"""
+                    upload (note that the model only accepts images in jpeg format)."""
                 ]
             )
         ]

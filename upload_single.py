@@ -18,8 +18,8 @@ single_upload = html.Div([
                     """Identify the animal in your image with just a few clicks!
                     Upload a single image and our AI model will analyse it to 
                     determine what species is present in the image. To get multiple 
-                    images classified at the same time, go to the page for multi upload.
-                    (Note, the model only accepts images in jpeg format)"""
+                    images classified at the same time, go to the page for multi upload
+                    (note that the model only accepts images in jpeg format)."""
                 ]
             )
         ]
